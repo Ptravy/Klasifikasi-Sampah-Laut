@@ -1,1 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Klasifikasi Jenis Sampah Laut</title>
+    <link rel="stylesheet" href="css/styl.css" />
+    <!-- Favicon -->
+    <link href="assets/img/logo.png" rel="icon" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Sistem Klasifikasi Jenis Sampah Laut</h1>
+      <div class="upload-section">
+        <label for="imageInput">Upload Gambar Sampah Laut</label>
+        <input type="file" id="imageInput" accept="image/*" onchange="uploadImage()" />
+      </div>
 
+      <div class="images-container">
+        <div class="image-box">
+          <h3>Gambar Input</h3>
+          <img id="uploadedImage" src="https://via.placeholder.com/300x200?text=Gambar+Input" alt="Gambar Input" class="centered" />
+        </div>
+        <div class="image-box">
+          <h3>Gambar Hasil Klasifikasi</h3>
+          <img id="predictionImage" src="https://via.placeholder.com/300x200?text=Gambar+Hasil+Deteksi" alt="Gambar Hasil Deteksi" class="centered" />
+        </div>
+      </div>
+      <div class="details">
+        <div class="detail-item">
+          <span id="predictionResult">Hasil Klasifikasi</span>
+        </div>
+      </div>
+      <!-- Bagian untuk menampilkan data prediksi -->
+      <div id="predictionDetails">
+        <div class="details">
+          <div class="detail-item">
+            Jumlah Input
+            <span id="inputCount">0</span>
+          </div>
+          <div class="detail-item">
+            Persentase Prediksi
+            <span id="predictionPercentage">0%</span>
+          </div>
+          <div class="detail-item">
+            Kecepatan Prediksi
+            <span id="predictionSpeed">0s</span>
+          </div>
+        </div>
+      </div>
+      <div class="back-section">
+        <a href="index.html" class="btn-back">Kembali</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; 2024 Sistem Klasifikasi Jenis Sampah Laut. Dikembangkan oleh Rovy Saputra Nugraha</p>
+    </footer>
+
+    <script>
+      async function uploadImage() {
+          const imageInput = document.getElementById("imageInput");
+          const predictionResult = document.getElementById("predictionResult");
+          const uploadedImage = document.getElementById("uploadedImage");
+          const predictionImage = document.getElementById("predictionImage");
+    
+          // Menampilkan pesan jika belum ada gambar yang diunggah
+          if (imageInput.files.length === 0) {
+              predictionResult.innerText = "Harap unggah gambar terlebih dahulu.";
+              predictionResult.style.color = "#d9534f"; // Merah untuk error
+              return;
+          }
+    
+          const file = imageInput.files[0];
+          const validTypes = ["image/jpeg", "image/png"]; // 2 Jenis File Gambar
+    
+          // Validasi tipe file
+          if (!validTypes.includes(file.type)) {
+              predictionResult.innerText = "Tipe file tidak valid. Harap unggah gambar dengan format JPG atau PNG.";
+              predictionResult.style.color = "#d9534f"; // Merah untuk error
+              return;
+          }
+    
+          const maxSizeInBytes = 5 * 1024 * 1024; // Max 5 MB
+          // Validasi ukuran file
+          if (file.size > maxSizeInBytes) {
+              predictionResult.innerText = "Ukuran file terlalu besar. Maksimal ukuran file adalah 5 MB.";
+              predictionResult.style.color = "#d9534f"; // Merah untuk error
+              return;
+          }
+    
+          const formData = new FormData();
+          formData.append("file", file);
+          const ngrokUrl = "https://e4f7-35-185-64-175.ngrok-free.app/predict"; // Sesuaikan URL ngrok
+    
+          try {
+              const response = await fetch(ngrokUrl, {
+                  method: "POST",
+                  body: formData,
+              });
+    
+              const data = await response.json();
+    
+              // Menangani error jika ada dalam respon
+              if (data.error) {
+                  predictionResult.innerText = "Maaf, data tidak sesuai untuk prediksi jenis sampah laut.";
+                  predictionResult.style.color = "#d9534f"; // Merah untuk error
+                  return;
+              }
+    
+              // Menampilkan hasil prediksi
+              if (data.prediction === "Sampah Organik") {
+                  predictionResult.innerText = `Hasil Klasifikasi: Sampah Organik`;
+                  predictionResult.style.color = "green"; // Hijau untuk organik
+              } else if (data.prediction === "Sampah Anorganik") {
+                  predictionResult.innerText = `Hasil Klasifikasi: Sampah Anorganik`;
+                  predictionResult.style.color = "red"; // Merah untuk anorganik
+              } else {
+                  predictionResult.innerText = "Kategori Tidak Dikenali";
+                  predictionResult.style.color = "black"; // Default jika tidak terdeteksi
+              }
+    
+              // Menampilkan gambar hasil deteksi
+              predictionImage.src = `data:image/png;base64,${data.image}`;
+              predictionImage.style.display = "block";
+    
+              // Menampilkan informasi tambahan
+              document.getElementById("inputCount").innerText = "1"; // Jumlah input gambar
+              document.getElementById("predictionPercentage").innerText = data.prediction_percentage || "0%"; // Persentase prediksi
+              document.getElementById("predictionSpeed").innerText = data.prediction_time || "0"; // Kecepatan prediksi (dalam detik)
+    
+              // Menampilkan gambar input
+              const reader = new FileReader();
+              reader.onload = function (e) {
+                  uploadedImage.src = e.target.result;
+                  uploadedImage.style.display = "block";
+              };
+              reader.readAsDataURL(file);
+    
+          } catch (error) {
+              console.error("Error uploading image:", error);
+              predictionResult.innerText = "Terjadi kesalahan saat mengunggah gambar.";
+              predictionResult.style.color = "#d9534f"; // Merah untuk error
+          }
+      }
+    </script>
+    
+  
+  </body>
+</html>
