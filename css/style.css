@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #e0e7ef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Design Card Halaman Depan */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 600px; /* Menambah lebar card */
+  padding: 30px; /* Menambah padding pada container */
+}
+
+.card {
+  background-color: #2d5aa3;
+  border-radius: 10px;
+  text-align: center;
+  padding: 40px; /* Menambah padding dalam card */
+  width: 100%;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); /* Membuat bayangan lebih besar */
+}
+
+.logo {
+  width: 100px; /* Menambah ukuran logo */
+  height: 100px;
+  margin-bottom: 30px; /* Menambah jarak bawah logo */
+}
+
+/* Tombol Masuk Ke Sistem */
+h1 {
+  color: white;
+  font-size: 28px; /* Membuat ukuran font lebih besar */
+  margin-bottom: 30px; /* Menambah jarak bawah judul */
+}
+
+.btn {
+  background-color: #e0f7de;
+  color: #2d5aa3;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 30px; /* Membuat tombol lebih besar */
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #c8e6c9;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .card {
+      padding: 25px; /* Sesuaikan untuk layar kecil */
+  }
+
+  .logo {
+      width: 80px;
+      height: 80px;
+  }
+
+  h1 {
+      font-size: 22px;
+  }
+
+  .btn {
+      font-size: 16px;
+      padding: 10px 20px;
+  }
+}
+

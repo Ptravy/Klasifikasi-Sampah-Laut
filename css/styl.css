@@ -1,0 +1,196 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #e0f7fa; /* Warna biru muda yang terinspirasi dari laut */
+  color: #333;
+}
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+  background-color: #fff; /* Tetap tambahkan warna putih untuk lapisan utama */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-image: url('../assets/img/umrah.jpg'); /* Masukkan URL gambar di sini */
+  background-size: cover; /* Agar gambar memenuhi area */
+  background-repeat: no-repeat; /* Tidak mengulang gambar */
+  background-position: center; /* Letakkan di tengah */
+  background-blend-mode: overlay; /* Membuat gambar menyatu dengan warna latar belakang */
+  background-color: rgba(255, 255, 255, 0.9); /* Menambahkan efek transparansi */
+}
+
+/* Media query untuk layar kecil (maksimal 768px) */
+@media (max-width: 768px) {
+  .container {
+    background-image: none; /* Menghilangkan gambar latar belakang pada layar kecil */
+  }
+}
+
+/* Media query untuk layar sangat kecil (maksimal 480px) */
+@media (max-width: 480px) {
+  .container {
+    background-image: none; /* Menghilangkan gambar latar belakang pada layar sangat kecil */
+  }
+}
+
+/* Header dan Upload Images */
+h1 {
+  text-align: center;
+  color: #0277bd; /* Biru laut */
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.upload-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.upload-section label {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #0277bd; /* Warna biru laut */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.upload-section label:hover {
+  background-color: #01579b; /* Warna biru lebih gelap saat hover */
+}
+.upload-section input[type="file"] {
+  display: none;
+}
+
+/* Gambar Input dan Klasifikasi */
+.images-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+}
+.image-box {
+  flex: 1;
+  min-width: 250px;
+  text-align: center;
+  padding: 15px;
+  background-color: #f0f4f8; /* Warna abu-abu muda */
+  border: 2px solid #595959; /* Border biru laut */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.image-box h3 {
+  font-size: 16px;
+  color: #0277bd; /* Warna biru laut untuk judul */
+  margin-bottom: 10px;
+}
+.image-box img {
+  width: 224px;
+  height: 224px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+.image-box img.centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Hasil Klasifikasi */
+.details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Selaraskan tombol di tengah */
+  margin-top: 30px;
+  gap: 10px;
+  text-align: center;
+  padding: 0 10px; /* Tambahkan padding untuk memastikan elemen tidak keluar */
+  box-sizing: border-box; /* Pastikan padding dihitung dalam ukuran elemen */
+}
+
+.details .detail-item {
+  flex: 1;
+  min-width: 100px; /* Ukuran minimal tombol */
+  max-width: 100%; /* Pastikan tidak melebihi lebar kontainer */
+  padding: 15px;
+  background-color: #b3e5fc; /* Warna biru muda */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #0277bd; /* Biru laut */
+  box-sizing: border-box;
+}
+
+.details .detail-item span {
+  display: block;
+  font-weight: bold;
+  margin-top: 5px;
+  font-size: 16px;
+  color: #01579b; /* Biru tua */
+}
+
+/* Tambahkan aturan untuk layar kecil */
+@media (max-width: 480px) {
+  .details {
+    flex-direction: column; /* Ubah menjadi kolom */
+    gap: 10px;
+  }
+
+  .details .detail-item {
+    flex: none;
+    width: 100%; /* Pastikan semua tombol memiliki lebar penuh */
+  }
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .images-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .details {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .upload-section label {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Tombol Kembali */
+.back-section {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn-back {
+  display: inline-block;
+  background-color: #f0ad4e;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-back:hover {
+  background-color: #ec971f;
+}
+.footer {
+  background-color: #0277bd;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 30px;
+  font-size: 14px;
+}
